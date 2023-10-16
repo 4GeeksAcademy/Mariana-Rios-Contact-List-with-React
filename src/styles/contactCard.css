@@ -1,0 +1,36 @@
+img {
+    border-radius: 50%;
+    height:200px;
+    width:200px;
+    margin: 10px;
+  } 
+
+.container {
+    display:flex;
+    border: 1px solid grey;
+    margin-bottom: 10px;
+    /* align-items: center; */
+}
+
+.info {
+    margin: 20px;
+}
+
+.iconinfo {
+    display:flex;
+    align-items: center;
+    color: grey;
+}
+
+span {
+    font-size: 20px;
+    margin-left: 5px;
+}
+
+.rightIcons {
+    margin-left: auto; 
+    /* align-items: start; */
+    margin-right: 0;
+    margin-top: 10px;
+}
+
