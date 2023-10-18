@@ -9,10 +9,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
 			getContacts: () => {
 				fetch('https://playground.4geeks.com/apis/fake/contact/agenda/mrios')
 					.then(resp => {
@@ -32,9 +28,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 			// ${method === "PUT" ? objContact.id : ""}
-			uploadContact: (objContact, method) => {
+			uploadContact: (objContact) => {
 				fetch(`https://playground.4geeks.com/apis/fake/contact`, {
-					method: method,
+					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
 					}, 
@@ -42,7 +38,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				.then(response => {
 					console.log("uplaod response: ", response)
-					console.log("uplaod JSON:", response.json())})
+					console.log("uplaod JSON:", response.json())
+					getActions().getContacts()})
+				.catch(error => console.log(error))
+			},
+
+			editContact: (objContact) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${objContact.id}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					}, 
+					body: JSON.stringify(objContact)
+				})
+				.then(response => {
+					console.log("uplaod response: ", response)
+					console.log("uplaod JSON:", response.json())
+					getActions().getContacts()})
+				.catch(error => console.log(error))
+			},
+
+			deleteContact: (id) => {
+				console.log("deleteID", id)
+				fetch(`https://playground.4geeks.com/apis/fake/contact/${id}`, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				.then(response => {
+					console.log("uplaod response: ", response)
+					console.log("uplaod JSON:", response.json())
+					getActions().getContacts()})
 				.catch(error => console.log(error))
 			}
 

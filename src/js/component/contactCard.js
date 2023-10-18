@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link} from "react-router-dom";
 
 const ContactCard = (props) => {
     return (
@@ -26,7 +26,7 @@ const ContactCard = (props) => {
                 <Link to={"/edit/" + props.idx}>
                     <button><i className="fa-solid fa-pencil"></i></button>
                 </Link>
-                <button><i className="fa-solid fa-trash-can"></i></button>
+                <button onClick={() => props.deleteContact(props.contactID)}><i className="fa-solid fa-trash-can"></i></button>
             </div>
         </div>
     )
