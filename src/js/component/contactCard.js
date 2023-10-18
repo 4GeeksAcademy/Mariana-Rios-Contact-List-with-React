@@ -23,7 +23,7 @@ const ContactCard = (props) => {
                 </div>
             </div>
             <div className="rightIcons">
-                <Link to={"/edit/" + props.idx}>import { Link } from "react-router-dom";
+                <Link to={"/edit/" + props.idx}>
                     <button><i className="fa-solid fa-pencil"></i></button>
                 </Link>
                 <button><i className="fa-solid fa-trash-can"></i></button>

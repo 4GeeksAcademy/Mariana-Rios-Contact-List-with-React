@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useContext, useParams } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useParams , useNavigate} from "react-router-dom";
 import { Context } from "../store/appContext";
 
 import "../../styles/addContact.css";
 
 export const AddContact = () => {  
     const params = useParams()
-
+    const navigate = useNavigate()
     const {store, actions} = useContext(Context)
  
     const [full_name, setFullName] = useState("")
     const [email, setEmail] = useState("")
     const [address, setAddress] = useState("")
     const [phone, setPhone] = useState("")
-    
+    const [id, setID] = useState("")
 
         useEffect(() => {
             if (params.index) {
@@ -22,10 +22,19 @@ export const AddContact = () => {
             setEmail(contact.email)
             setAddress(contact.address)
             setPhone(contact.phone)
+            setID(contact.id)
             }
         }, []);
 
-
+    const onSubmit = () => {
+        if (params.index){
+            actions.uploadContact(objContact, "PUT")
+            navigate("/")
+        }
+        else{
+            actions.uploadContact(objContact, "POST")
+        }
+    }
 
 
 
@@ -33,7 +42,8 @@ export const AddContact = () => {
         email: email,
         agenda_slug: "mrios",
         address: address,
-        phone: phone}
+        phone: phone,
+        id: id}
 
     return(
         <div className="addConForm">
@@ -56,7 +66,7 @@ export const AddContact = () => {
                     <input type="text" class="form-control" id="inputAddress" placeholder="Enter Address" onChange={e => setAddress(e.target.value)} value={address}></input>
                 </div>
                 <div class="col-12">
-                    <button type="submit" class="btn btn-primary" onClick={() => actions.uploadContact(objContact)}>Submit</button>
+                    <button type="submit" class="btn btn-primary" onClick={onSubmit}>Submit</button>
                 </div>
                 <Link to="/">
                         <span>or get back to contacts</span>

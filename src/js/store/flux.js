@@ -31,10 +31,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(error);
 					});
 			},
-
-			uploadContact: (objContact) => {
-				fetch('https://playground.4geeks.com/apis/fake/contact', {
-					method: "POST",
+			// ${method === "PUT" ? objContact.id : ""}
+			uploadContact: (objContact, method) => {
+				fetch(`https://playground.4geeks.com/apis/fake/contact`, {
+					method: method,
 					headers: {
 						"Content-Type": "application/json"
 					}, 
